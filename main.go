@@ -21,6 +21,11 @@ func main() {
 
 	flag.Parse()
 
+	if len(os.Args) < 2 {
+		printUsage()
+		os.Exit(1)
+	}
+
 	if *filesFlag == "" {
 		log.Fatal("The -files flag is required")
 	}
@@ -38,6 +43,13 @@ func main() {
 	for _, file := range fileList {
 		processFitFile(file, *outputFlag)
 	}
+}
+
+func printUsage() {
+	fmt.Printf("Usage: %s -files <files_or_directory> [-output <output_directory>]\n", os.Args[0])
+	fmt.Println("\nOptions:")
+	fmt.Println("  -files  : Space-delimited set of filenames or a directory containing .fit files (required)")
+	fmt.Println("  -output : Directory to output files to, defaults to current directory (optional)")
 }
 
 // getFitFiles returns a list of .fit files based on the provided input (filesFlag)
