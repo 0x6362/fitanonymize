@@ -9,7 +9,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/tormoder/fit"
 )
@@ -63,8 +62,7 @@ func getFitFiles(filesFlag string) []string {
 			log.Fatalf("Failed to list .fit files: %v", err)
 		}
 	} else {
-		// Split the space-delimited string into file paths
-		files = strings.Split(filesFlag, " ")
+		files = append(files, filesFlag)
 	}
 
 	return files
